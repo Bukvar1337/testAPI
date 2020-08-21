@@ -1,13 +1,13 @@
 class PostsController < ApplicationController
 
-  http_basic_authenticate_with name: "anecdotmaster", password: "1337",
-                               except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show]
+
   def index
     @post = Post.all
   end
 
   def new
-    @post = Post.new
+    @post = current_user.posts.build
   end
 
   def show
@@ -37,7 +37,7 @@ class PostsController < ApplicationController
 
   def create
     # render plain: params[:post].inspect
-    @post = Post.new(post_params)
+    @post = current_user.posts.build(post_params)
 
     if(@post.save)
       redirect_to @post

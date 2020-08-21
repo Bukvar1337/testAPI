@@ -3,6 +3,10 @@
   <div class="well">
     <h3><%= post.title %></h3>
     <p><%= post.body %></p>
+    <p>
+      Автор:
+      <%= post.user.email %>
+    </p>
     <%= link_to "Читать далее", post_path(post), :class => 'btn btn-outline-primary' %>
   </div>
 <% end %>
