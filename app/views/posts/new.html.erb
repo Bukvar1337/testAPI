@@ -1,0 +1,22 @@
+<h2>Добавление нового анекдота</h2>
+<%= form_for :post, url: posts_path do |f| %>
+  <% if @post.errors.any? %>
+    <%@post.errors.full_messages.each do |msg| %>
+      <div class = "allert alert-danger"><%= msg %></div>
+    <% end %>
+  <% end %>
+  <p>
+    Название<br>
+    <%= f.text_field (:title) %>
+  </p>
+
+  <p>
+    Анекдот<br>
+    <%= f.text_area :body %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+
+<% end %>
