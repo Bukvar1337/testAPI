@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_19_134238) do
+ActiveRecord::Schema.define(version: 2020_08_21_070704) do
 
 # Could not dump table "posts" because of following StandardError
 #   Unknown type 'unteger' for column 'user_id'
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2020_08_19_134238) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "admin", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
