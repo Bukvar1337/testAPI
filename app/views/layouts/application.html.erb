@@ -14,6 +14,9 @@
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
   <h5 class="my-0 mr-md-auto font-weight-bold">AnClub</h5>
   <nav class="my-2 my-md-0 mr-md-3">
+
+      <span class="p-2 text-dark"><%= link_to "Пользователи", users_path%></span>
+
     <% if user_signed_in? %>
       <span class="p-2 text-dark"><%= link_to "Выйти", destroy_user_session_path, method: :delete %></span>
       <% else %>
