@@ -9,6 +9,10 @@
 <h2>Комментарии</h2>
 <% @post.comments.each do |comment| %>
   <div class="well">
+    <p><strong>
+      <%= comment.user.email %>
+      :
+    </strong></p>
     <p><%= comment.body %></p>
   </div>
 <% end %>

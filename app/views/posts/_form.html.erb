@@ -1,8 +1,4 @@
-<h2>Редактирование анекдота</h2>
-
-<%= render partial: "form", locals: {post: @post} %>
-
-<!--<%= form_for :post, url: post_path(@post), method: :patch do |f| %>
+<%= form_for(post) do |f| %>
   <% if @post.errors.any? %>
     <%@post.errors.full_messages.each do |msg| %>
       <div class = "allert alert-danger"><%= msg %></div>
@@ -19,8 +15,7 @@
   </p>
 
   <p>
-    <%= f.submit%>
+    <%= f.submit %>
   </p>
 
 <% end %>
--->

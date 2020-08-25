@@ -1,8 +1,7 @@
 class PagesController < ApplicationController
   def about
-    @heading = 'Правила анекдотного клуба'
-    @text1 = 'Первое правило андекдотного клуба: никому не рассказывать об анекдотном клубе.'
-    @text2 = 'Второе правило андекдотного клуба: никогда никому не рассказывать об анекдотном клубе.'
+    @post = Post.all
+    render json: @post
   end
 end
 
