@@ -1,5 +1,12 @@
 class CommentsController < ApplicationController
 
+  protect_from_forgery with: :null_session
+  skip_before_action :verify_authenticity_token
+
+  def index
+    @comment = Comment.all
+  end
+
   def create
     # First get the parent post:
     @post = Post.find(params[:post_id])

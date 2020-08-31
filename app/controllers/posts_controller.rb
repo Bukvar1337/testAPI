@@ -1,6 +1,9 @@
 class PostsController < ApplicationController
   load_and_authorize_resource
+  protect_from_forgery with: :null_session
+  skip_before_action :verify_authenticity_token
   before_action :authenticate_user!, except: [:index, :show]
+
 
   def index
     @post = Post.order(:title).page(params[:page])
@@ -8,11 +11,13 @@ class PostsController < ApplicationController
 
   def new
     @post = current_user.posts.build
+    @post.comments.new
   end
 
   def show
     @post = Post.find(params[:id])
     @comments = @post.comments.includes(:user)
+    render json: @post, include: :comments
   end
 
   def edit
@@ -38,7 +43,8 @@ class PostsController < ApplicationController
 
   def create
     # render plain: params[:post].inspect
-    @post = current_user.posts.build(post_params)
+    @post = current_user.posts.new(post_params)
+    @post.comments.first.user_id = current_user.id
 
     if(@post.save)
       redirect_to @post
@@ -48,6 +54,6 @@ class PostsController < ApplicationController
   end
 
   private def post_params
-    params.require(:post).permit(:title, :body)
+    params.require(:post).permit([:title, :body], comments_attributes:[:body])
   end
 end
