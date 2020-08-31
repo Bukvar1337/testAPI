@@ -10,7 +10,7 @@ class PostsController < ApplicationController
   end
 
   def new
-    @post = current_user.posts.build
+    @post = current_user.posts.new
     @post.comments.new
   end
 
@@ -44,7 +44,7 @@ class PostsController < ApplicationController
   def create
     # render plain: params[:post].inspect
     @post = current_user.posts.new(post_params)
-    @post.comments.first.user_id = current_user.id
+    @post.comments.each {|comment| comment.user_id = current_user.id}
 
     if(@post.save)
       redirect_to @post
