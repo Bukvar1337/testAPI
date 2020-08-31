@@ -22289,3 +22289,59 @@ Processing by UsersController#index as HTML
 Completed 200 OK in 11ms (Views: 9.4ms | ActiveRecord: 0.7ms | Allocations: 6881)
 
 
+Started GET "/" for 127.0.0.1 at 2020-08-31 09:45:30 +0300
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY "posts"."title" ASC LIMIT $1 OFFSET $2[0m  [["LIMIT", 5], ["OFFSET", 0]]
+  ↳ app/views/posts/index.html.erb:2
+  Rendered posts/index.html.erb within layouts/application (Duration: 2.4ms | Allocations: 1570)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 30ms (Views: 9.7ms | ActiveRecord: 4.3ms | Allocations: 20269)
+
+
+Started GET "/posts/new" for 127.0.0.1 at 2020-08-31 09:45:32 +0300
+Processing by PostsController#new as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_form.html.erb (Duration: 2.6ms | Allocations: 2678)
+  Rendered posts/new.html.erb within layouts/application (Duration: 3.3ms | Allocations: 2973)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 39ms (Views: 6.8ms | ActiveRecord: 6.8ms | Allocations: 20907)
+
+
+Started POST "/posts" for ::1 at 2020-08-31 09:45:58 +0300
+Processing by PostsController#create as */*
+  Parameters: {"title"=>"Postman test", "body"=>"Test", "user_id"=>1, "comments_attributes"=>[{"username"=>"null", "body"=>"test comment", "post_id"=>1, "user_id"=>1}], "post"=>{"title"=>"Postman test", "body"=>"Test", "user_id"=>1, "comments_attributes"=>[{"username"=>"null", "body"=>"test comment", "post_id"=>1, "user_id"=>1}]}}
+[31mUnpermitted parameters: :username, :post_id, :user_id[0m
+[31mUnpermitted parameter: :user_id[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "bukvar1337@leet.com"], ["LIMIT", 1]]
+[31mUnpermitted parameters: :username, :post_id, :user_id[0m
+[31mUnpermitted parameter: :user_id[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/posts_controller.rb:49:in `create'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:49:in `create'
+  [1m[36mPost Create (0.4ms)[0m  [1m[32mINSERT INTO "posts" ("title", "body", "created_at", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "Postman test"], ["body", "Test"], ["created_at", "2020-08-31 06:45:59.066615"], ["updated_at", "2020-08-31 06:45:59.066615"], ["user_id", 1]]
+  ↳ app/controllers/posts_controller.rb:49:in `create'
+  [1m[36mComment Create (0.6ms)[0m  [1m[32mINSERT INTO "comments" ("body", "post_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["body", "test comment"], ["post_id", 43], ["user_id", 1], ["created_at", "2020-08-31 06:45:59.068132"], ["updated_at", "2020-08-31 06:45:59.068132"]]
+  ↳ app/controllers/posts_controller.rb:49:in `create'
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/posts_controller.rb:49:in `create'
+Redirected to http://localhost:3000/posts/43
+Completed 302 Found in 216ms (ActiveRecord: 2.8ms | Allocations: 10979)
+
+
+Started GET "/posts/43" for ::1 at 2020-08-31 09:45:59 +0300
+Processing by PostsController#show as */*
+  Parameters: {"id"=>"43"}
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 43], ["LIMIT", 1]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "bukvar1337@leet.com"], ["LIMIT", 1]]
+  [1m[36mCACHE Post Load (0.0ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 43], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:18:in `show'
+  [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 43]]
+  ↳ app/controllers/posts_controller.rb:20:in `show'
+Completed 200 OK in 205ms (Views: 1.7ms | ActiveRecord: 0.8ms | Allocations: 5518)
+
+
