@@ -1,6 +1,8 @@
-class PostsController < ApplicationController
+class Admin::PostsController < ApplicationController
   load_and_authorize_resource
   before_action :authenticate_user!, except: [:index, :show]
+
+  # Тут для вьюх все норм!
 
   def index
     @post = Post.order(:title).page(params[:page])

@@ -1,4 +1,6 @@
-class CommentsController < ApplicationController
+class Admin::CommentsController < ApplicationController
+
+  # Для вьх все норм
 
   def create
     # First get the parent post:
