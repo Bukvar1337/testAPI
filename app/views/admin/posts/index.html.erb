@@ -1,0 +1,24 @@
+<%= form_tag posts_path, :method => 'get' do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Найти анекдот" %>
+  </p>
+<% end %>
+
+<h1>Все Анекдоты</h1>
+
+<% @post.each do |post| %>
+  <div class="well">
+    <h3><%= post.title %></h3>
+    <p><%= post.body %></p>
+    <p>
+      Автор:
+      <%= post.user.email %>
+    </p>
+    <%= link_to "Читать далее", post_path(post), :class => 'btn btn-outline-primary' %>
+  </div>
+<% end %>
+
+ <br>
+
+<%= paginate @post, window: 1, left: 1, right: 1 %>

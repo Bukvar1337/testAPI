@@ -1,0 +1,15 @@
+<% @user.each do |user| %>
+  <div class="well">
+    <p>
+      <%= user.email %>
+      <%if user.admin == true %>
+        - Администратор
+        <%= link_to "Разжаловать", reset_admin_user_path(user), method: :put, data:{confirm:"Хотите испорить человеку жизнь?"},:class => 'btn btn-danger' %>
+      <%else %>
+        - Пользователь
+        <%= link_to "Сделать администратором", reset_admin_user_path(user), method: :put, data:{confirm:"Хотите сделать данного пользователя админом?"},:class => 'btn btn-success' %>
+        <%end %>
+    </p>
+
+  </div>
+<% end %>
